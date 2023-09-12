@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+data:
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: rahasia
+  POSTGRES_DB: mydb
+  PGDATA: /var/lib/postgresql/data/pgdata

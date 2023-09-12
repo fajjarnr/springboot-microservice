@@ -1,0 +1,40 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: zipkin
+  namespace: micro
+spec:
+  host: zipkin.apps.fajar-project.site
+  to:
+    kind: Service
+    name: zipkin
+    weight: 100
+  tls:
+    termination: edge
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: zipkin.apps.fajar-project.site
+      routerName: external
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:47:31Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-external.external.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: zipkin.apps.fajar-project.site
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:47:32Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: zipkin.apps.fajar-project.site
+      routerName: internal
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:47:32Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-internal.internal.ngb-rosa-prod.ilkw.p1.openshiftapps.com

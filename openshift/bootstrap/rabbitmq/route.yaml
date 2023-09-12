@@ -1,0 +1,44 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: rabbitmq
+  namespace: micro
+  labels:
+    app: rabbitmq
+spec:
+  host: rabbitmq.apps.fajar-project.site
+  to:
+    kind: Service
+    name: rabbitmq
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: rabbitmq.apps.fajar-project.site
+      routerName: external
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:51:09Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-external.external.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: rabbitmq.apps.fajar-project.site
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:51:09Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: rabbitmq.apps.fajar-project.site
+      routerName: internal
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T14:51:09Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-internal.internal.ngb-rosa-prod.ilkw.p1.openshiftapps.com

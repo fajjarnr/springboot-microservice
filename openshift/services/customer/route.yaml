@@ -1,0 +1,40 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: customer
+  namespace: micro
+spec:
+  host: customer.apps.fajar-project.site
+  to:
+    kind: Service
+    name: customer
+    weight: 100
+  tls:
+    termination: edge
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: customer.apps.fajar-project.site
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T15:30:02Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: customer.apps.fajar-project.site
+      routerName: external
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T15:30:02Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-external.external.ngb-rosa-prod.ilkw.p1.openshiftapps.com
+    - host: customer.apps.fajar-project.site
+      routerName: internal
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-09-12T15:30:02Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-internal.internal.ngb-rosa-prod.ilkw.p1.openshiftapps.com
